@@ -77,7 +77,7 @@ router.put("/:id", async(req, res, next)=>{
     });
 });
 
-
+// DELETE TAPEL
 router.delete("/:id", async (req, res, next) => {
     const id = req.params.id;
   
