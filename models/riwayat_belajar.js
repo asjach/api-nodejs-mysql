@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes)=>{
           autoIncrement:true,
           allowNull:false
         },
-        nis:{
-          type:DataTypes.STRING,
-          allowNull:false,
-          references: {
-            model: 'Siswa',
-            key: 'nis'
-          }
-        },
+        // nis:{
+        //   type:DataTypes.STRING,
+        //   allowNull:false,
+        //   references: {
+        //     model: 'Siswa',
+        //     key: 'nis'
+        //   }
+        // },
         tapel:{type:DataTypes.STRING},
         jenjang:{type:DataTypes.STRING},
         tingkat:{type:DataTypes.STRING},
@@ -27,9 +27,10 @@ module.exports = (sequelize, DataTypes)=>{
         createdAt:{type: DataTypes.DATE, allowNull: false},
         updatedAt: {type: DataTypes.DATE, allowNull: false}
       }, 
-    {});
+    {tableName: 'riwayat_belajar'});
     Riwayat_Belajar.associate = function(models){
-        Riwayat_Belajar.belongsTo(models.Siswa, { foreignKey: 'nis'})
+        //Riwayat_Belajar.belongsTo(models.Siswa)
+       Riwayat_Belajar.belongsTo(models.Siswa, { foreignKey: 'SiswaNis'})
     };
     return Riwayat_Belajar;
 };

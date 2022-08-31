@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes)=>{
         
         );
     Siswa.associate = function(models){
-        Siswa.hasMany(models.Riwayat_Belajar, {as: 'siswa'})
+        Siswa.hasMany(models.Riwayat_Belajar)
+        //Siswa.hasMany(models.Riwayat_Belajar, {as: 'siswa'})
     }
     return Siswa;
 }

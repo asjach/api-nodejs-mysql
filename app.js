@@ -13,6 +13,8 @@ var usersRouter = require('./routes/users');
 var notesRouter = require('./routes/notes');
 var siswaRouter = require('./routes/siswa');
 var tapelRouter = require('./routes/tapel');
+var riwayatBelajarRouter = require('./routes/riwayat_belajar');
+const { sequelize } = require('./models');
 
 
 var app = express();
@@ -31,6 +33,7 @@ app.use('/users', usersRouter);
 app.use('/notes', notesRouter);
 app.use('/siswa', siswaRouter);
 app.use('/tapel', tapelRouter);
+app.use('/riwayat_belajar', riwayatBelajarRouter);
 
-
+//sequelize.sync({alter:true});
 module.exports = app;

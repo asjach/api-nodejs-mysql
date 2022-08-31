@@ -18,11 +18,11 @@ router.get("/", async (req, res, next)=> {
 });
 
 //GET BY ID
-router.get("/:nik", async (req, res, next) => {
-    const nik = req.params.nik;
+router.get("/:nis", async (req, res, next) => {
+    const nis = req.params.nis;
   
-    //cek nik apakah ada atau tidak ada
-    let siswa = await Siswa.findByPk(nik);
+    //cek nis apakah ada atau tidak ada
+    let siswa = await Siswa.findByPk(nis);
     if (!siswa) {
       return res.status(404).json({ status: 404, message: "ID not Found!" });
     } else {
@@ -39,7 +39,7 @@ router.post("/", async (req, res, next) => {
       nis:"string",
       nama: "string",
       
-      // nik:{
+      // nis:{
       //   type:"string|optional",
       //   nullable:true,
       //   min:10,
@@ -61,9 +61,9 @@ router.post("/", async (req, res, next) => {
   });
 
   //UPDATE SISWA
-router.put("/:nik", async(req, res, next)=>{
-  const nik = req.params.nik;
-  let siswa = await Siswa.findByPk(nik);
+router.put("/:nis", async(req, res, next)=>{
+  const nis = req.params.nis;
+  let siswa = await Siswa.findByPk(nis);
   if(!siswa){
       return res.status(404).json({status: 404, message: "Data tidak ditemukan"});
   } 
@@ -72,7 +72,7 @@ router.put("/:nik", async(req, res, next)=>{
       nama: "string|optional",
       nis: "string|optional",
       jk: "string|optional",
-      nik:{
+      nis:{
         type:"string",
         optional:true,
         empty:true,
@@ -96,10 +96,10 @@ router.put("/:nik", async(req, res, next)=>{
 
 //DELETE SISWA
 router.delete("/:id", async (req, res, next) => {
-  const nik = req.params.nik;
+  const nis = req.params.nis;
 
-  //cek nik apakah ada atau tidak ada
-  let siswa = await Siswa.findByPk(nik);
+  //cek nis apakah ada atau tidak ada
+  let siswa = await Siswa.findByPk(nis);
   if (!siswa) {
     return res.status(404).json({
       status: 404,
