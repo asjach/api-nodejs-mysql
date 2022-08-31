@@ -1,6 +1,7 @@
+
 module.exports = (sequelize, DataTypes)=>{ 
     const Riwayat_Belajar = sequelize.define(
-    "Notes",
+    "Riwayat_Belajar",
     { 
         id: {
           type:DataTypes.INTEGER,
@@ -12,7 +13,7 @@ module.exports = (sequelize, DataTypes)=>{
           type:DataTypes.STRING,
           allowNull:false,
           references: {
-            model: 'siswa',
+            model: 'Siswa',
             key: 'nis'
           }
         },
@@ -28,7 +29,7 @@ module.exports = (sequelize, DataTypes)=>{
       }, 
     {});
     Riwayat_Belajar.associate = function(models){
-        Riwayat_Belajar.hasMany(models.User, {as: 'santri'})
-    }
+        Riwayat_Belajar.belongsTo(models.Siswa, { foreignKey: 'nis'})
+    };
     return Riwayat_Belajar;
-}
+};

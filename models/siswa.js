@@ -17,7 +17,14 @@ module.exports = (sequelize, DataTypes)=>{
           nisn: {type:DataTypes.STRING(10)},
           nik: {type:DataTypes.STRING(16)},
           alamat: {type:DataTypes.STRING}
-    },{tableName: "siswa"}
-    );
+    },{
+        //nama tabel di database
+        tableName: 'siswa'}
+        
+        
+        );
+    Siswa.associate = function(models){
+        Siswa.hasMany(models.Riwayat_Belajar, {as: 'siswa'})
+    }
     return Siswa;
 }
