@@ -37,7 +37,13 @@ router.post("/", async (req, res, next) => {
     //validation
     const schema = {
       nama: "string",
-      nis:"string"
+      nis:"string|optional",
+      nik:{
+        type:"string|optional",
+        nullable:true,
+        min:10,
+        max:16
+      }
     };
     const validate = v.validate(req.body, schema);
     if (validate.length) {
@@ -65,9 +71,16 @@ router.put("/:id", async(req, res, next)=>{
       nama: "string|optional",
       nis: "string|optional",
       jk: "string|optional",
+      nik:{
+        type:"string",
+        optional:true,
+        empty:true,
+        min:10,
+        max:16
+      }
   }
 
-  const validate= v.validate(req.body, schema);
+  const validate = v.validate(req.body, schema);
   if (validate.length){
       return res.status(400).json(validate);
   }
