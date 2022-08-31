@@ -10,9 +10,10 @@ var logger = require('morgan');
 //path relative ke file (supaya fungsi/class dapat digunakan)
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-//5. routes notes
 var notesRouter = require('./routes/notes');
 var siswaRouter = require('./routes/siswa');
+var tapelRouter = require('./routes/tapel');
+
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/users', usersRouter);
 //6. langkah 5 dipanggil disini
 app.use('/notes', notesRouter);
 app.use('/siswa', siswaRouter);
+app.use('/tapel', tapelRouter);
 
 
 module.exports = app;
