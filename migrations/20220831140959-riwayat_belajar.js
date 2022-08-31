@@ -15,6 +15,10 @@ module.exports = {
       nis:{
         type:Sequelize.STRING,
         allowNull:false,
+        references: {
+          model: 'siswa',
+          key: 'nis'
+        }
       },
       tapel:{type:Sequelize.STRING},
       jenjang:{type:Sequelize.STRING},
