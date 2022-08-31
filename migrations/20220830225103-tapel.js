@@ -11,7 +11,11 @@ module.exports = {
     
 
      await queryInterface.createTable('tapel', { 
-      id: Sequelize.INTEGER, 
+      id: {
+        type:Sequelize.INTEGER, 
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false},
       tapel: {type:Sequelize.STRING(10), allowNull: false},
       show:{type:Sequelize.BOOLEAN},
       createdAt:{type: Sequelize.DATE, allowNull: false},

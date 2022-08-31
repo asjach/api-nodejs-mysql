@@ -6,7 +6,7 @@ const v = new Validator();
 const { Tapel } = require ('../models');
 
 //get All
-router.length("/", async(req, res, next)=>{
+router.get("/", async(req, res, next)=>{
     const tapel = await Tapel.findAll();
     return res.json({
         status: 200,
@@ -18,7 +18,7 @@ router.length("/", async(req, res, next)=>{
 //get by id
 router.get("/:id", async(req, res, next)=> {
 const id = req.params.id;
-let tapel = await Siswa.findByPk();
+let tapel = await Tapel.findByPk(id);
 //cek id apakah ada atau tidak ada
 if(!tapel){
     return res.status(404).json({status: 404, message: "ID tidak ditemukan"});
@@ -31,6 +31,7 @@ if(!tapel){
 router.post("/", async(req, res, next)=> {
     //validasi
     const schema ={
+        
         tapel: "string"
     }
     const validate = v.validate(req.body, schema);
@@ -68,7 +69,7 @@ router.put("/:id", async(req, res, next)=>{
     }
 
     //proses update tapel
-    tapel = await NodeIterator.update(req.body);
+    tapel = await tapel.update(req.body);
     res.json({
         status:200,
         message: "data tapel berhasil di update",
