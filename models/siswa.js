@@ -1,5 +1,6 @@
 
 module.exports = (sequelize, DataTypes)=>{ 
+    //sequelize.define(nama model, attributes, options)
     const Siswa = sequelize.define(
     "Siswa",
     {
@@ -18,8 +19,11 @@ module.exports = (sequelize, DataTypes)=>{
           nik: {type:DataTypes.STRING(16)},
           alamat: {type:DataTypes.STRING}
     },{
+        //OPTION
         //nama tabel di database
         tableName: 'siswa', 
+        //jika ingin nama tabel di dbsesuai nama model 
+        //freezeTable: true,
         timestamps:false,}
         
         

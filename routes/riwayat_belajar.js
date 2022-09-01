@@ -3,7 +3,7 @@ var router = express.Router();
 
 const Validator = require('fastest-validator');
 const v = new Validator();
-const { Riwayat_Belajar } = require('../models');
+const { Riwayat_Belajar, Siswa, Sequelize } = require('../models');
 
 //get All
 router.get("/", async (req, res, next)=> {
@@ -16,6 +16,52 @@ router.get("/", async (req, res, next)=> {
         data: riwayat_belajar,
     })}
 });
+
+
+
+
+//get All but specific Attributes to be show
+router.get("/specific", async (req, res, next)=> {
+  //untuk membatas atribut yang ditampilkan dalam method findAll kita kasih argumen
+  //const riwayat_belajar = await Riwayat_Belajar.findAll({attributes:['nis', 'tingkat', 'kelas']});
+
+
+////akan menampilkan attribut dari siswa 
+// const riwayat_belajar = await Riwayat_Belajar.findAll({ 
+//   attributes:['tingkat','kelas','status_awal'],
+//   include: {
+//     model: Siswa, attributes:['nama', 'alamat']
+//   }});
+
+
+const riwayat_belajar= await Riwayat_Belajar.findAll({
+  include:[{model: Siswa, 
+    attributes:[]}],
+  attributes:[
+    'nis',
+    'kelas',
+    [Sequelize.literal('`siswa`.`nama`'),'nama'],
+    [Sequelize.literal('`siswa`.`ibu`'),'Nama Ibu']
+  ], 
+  });
+
+
+  if(!riwayat_belajar){
+  return res.status(404).json({status: 404, message: "Tidak Ada Data!"})
+}else {return res.json({
+      status: 200,
+      message: "Sukses",
+      data: riwayat_belajar,
+  })}
+});
+
+
+
+
+
+
+
+
 
 //GET BY ID
 router.get("/:id", async (req, res, next) => {
