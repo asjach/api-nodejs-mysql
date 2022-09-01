@@ -4,17 +4,23 @@ var router = express.Router();
 const Validator = require('fastest-validator');
 const v = new Validator();
 const { Siswa } = require('../models');
+const { Op } = require("sequelize");
 
 //get All
 router.get("/", async (req, res, next)=> {
-    const siswa = await Siswa.findAll();
+  //attributes digunakan untuk memilih kolom yang akan ditampilkan
+  const siswa = await Siswa.findAll({attributes:['nama','ayah','ibu']});
+  //exclude: digunakan untuk mengeluarkan kolom dari yang ditampilkan
+    //const siswa = await Siswa.findAll({attributes:{exclude:['nama']}});
     if(!siswa){
     return res.status(404).json({status: 404, message: "Tidak Ada Data!"})
-}else {return res.json({
+}else {
+  return res.json({
         status: 200,
         message: "Sukses, memanggil seluruh data siswa",
         data: siswa,
-    })}
+    });
+  };
 });
 
 //GET BY ID
@@ -31,6 +37,26 @@ router.get("/:nis", async (req, res, next) => {
         .json({ status: 200, message: "ID ditemukan", data: siswa });
     }
   });
+
+//   //CONTAINS
+// router.get("/:nama", async (req, res, next) => {
+//   const nama = req.params.nama;
+
+//   //cek nis apakah ada atau tidak ada
+//   let siswa = await Siswa.findAll({
+//     where:{
+//       nama:{[Op.substring]: nama},
+//   }
+// });
+// console.log(siswa);
+//   if (!siswa) {
+//     return res.status(404).json({ status: 404, message: "ID not Found!" });
+//   } else {
+//     return res
+//       .status(200)
+//       .json({ status: 200, message: "ID ditemukan", data: siswa });
+//   }
+// });
 
 //CREATE/POST
 router.post("/", async (req, res, next) => {
@@ -95,7 +121,7 @@ router.put("/:nis", async(req, res, next)=>{
 });
 
 //DELETE SISWA
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:nis", async (req, res, next) => {
   const nis = req.params.nis;
 
   //cek nis apakah ada atau tidak ada

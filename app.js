@@ -35,5 +35,21 @@ app.use('/siswa', siswaRouter);
 app.use('/tapel', tapelRouter);
 app.use('/riwayat_belajar', riwayatBelajarRouter);
 
+
+
+// untuk mengubah seluruh tabel di db sesuai model di sequelize
+// ALTER TABLE
+
 //sequelize.sync({alter:true});
+
+// menghapus seluruh tabel di db, kemudian membuat kembali tabel (mereset tabel)
+//DROP Table and CREATE table
+//sequelize.sync({force:true});
+
+//menghapus seluruh tabel di db
+//sequelize.drop();
+
+//untuk menghapus tabel tertentu
+//namamodel.drop();
+
 module.exports = app;

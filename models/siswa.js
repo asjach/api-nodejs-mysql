@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes)=>{
           nama: {type:DataTypes.STRING},
           jk: {type:DataTypes.STRING},
           tmp_lahir: {type:DataTypes.STRING},
-          tgl_lahir: {type:DataTypes.DATE},
+          tgl_lahir: {type:DataTypes.DATEONLY},
           ayah: {type:DataTypes.STRING},
           ibu: {type:DataTypes.STRING},
           nisn: {type:DataTypes.STRING(10)},
@@ -19,12 +19,14 @@ module.exports = (sequelize, DataTypes)=>{
           alamat: {type:DataTypes.STRING}
     },{
         //nama tabel di database
-        tableName: 'siswa'}
+        tableName: 'siswa', 
+        timestamps:false,}
         
         
         );
     Siswa.associate = function(models){
-        Siswa.hasMany(models.Riwayat_Belajar)
+        //Siswa.hasMany(models.Siswa)
+        Siswa.hasMany(models.Riwayat_Belajar, {foreignKey: 'nis'})
         //Siswa.hasMany(models.Riwayat_Belajar, {as: 'siswa'})
     }
     return Siswa;
